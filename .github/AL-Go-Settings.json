@@ -1,4 +1,14 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@main"
+  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@main",
+  "NextMajorSchedule": "0 2 * * 0",
+  "NextMinorSchedule": "0 2 * * 6",
+  "CurrentSchedule": "0 2 * * 1,2,3,4,5",
+  "runs-on": "ubuntu-latest",
+  "unusedALGoSystemFiles": [
+    "AddExistingAppOrTestApp.yaml",
+    "CreateApp.yaml",
+    "CreateTestApp.yaml",
+    "CreatePerformanceTestApp.yaml"
+  ]
 }

@@ -1,9 +1,15 @@
 {
   "country": "us",
-  "appSourceCopMandatoryAffixes": [
-    "<affix>"
+  "VersioningStrategy": 16,
+  "xKeyVaultCertificateUrlSecretName": "KeyVaultCertificateFile",
+  "xKeyVaultCertificatePasswordSecretName": "KeyVaultCertificatePassword",
+  "xKeyVaultClientIdSecretName": "KeyVaultClientId",
+  "CodeSignCertificateUrlSecretName": "CodeSignCertificateUrl",
+  "CodeSignCertificatePasswordSecretName": "CodeSignCertificatePassword",
+  "AppSourceCopMandatoryAffixes": [
+    "BIN"
   ],
-  "appFolders": [],
-  "testFolders": [],
-  "bcptTestFolders": []
+  "AppSourceProductId": "5fbe0803-a545-4504-b41a-d9d158112360",
+  "AppSourceContinuousDelivery": true,
+  "RepoVersion": "3.5"
 }

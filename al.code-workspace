@@ -1,7 +1,16 @@
 {
     "folders":  [
                     {
+                        "path":  "BingMaps"
+                    },
+                    {
+                        "path":  "BingMaps.Test"
+                    },
+                    {
                         "path":  ".AL-Go"
+                    },
+                    {
+                        "path":  ".github"
                     }
                 ],
     "settings":  {
