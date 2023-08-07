@@ -83,9 +83,10 @@ jobs:
             shell: ${{ inputs.shell }}
             parentTelemetryScopeJson: ${{ inputs.parentTelemetryScopeJson }}
             project: ${{ inputs.project }}
-            get: useCompilerFolder,keyVaultCodesignCertificateName,doNotSignApps
+            get: useCompilerFolder,keyVaultCodesignCertificateName,doNotSignApps,artifact
 
         - name: Read secrets
+          if: github.event_name != 'pull_request'
           uses: freddydk/AL-Go/Actions/ReadSecrets@OnlyNeededSecrets
           with:
             shell: ${{ inputs.shell }}
@@ -103,11 +104,11 @@ jobs:
             project: ${{ inputs.project }}
 
         - name: Cache Business Central Artifacts
-          if: env.useCompilerFolder == 'True' && inputs.useArtifactCache && env.ArtifactCacheKey
+          if: env.useCompilerFolder == 'True' && inputs.useArtifactCache && env.artifactCacheKey
           uses: actions/cache@v3
           with:
             path: .artifactcache
-            key: ${{ env.ArtifactCacheKey }}
+            key: ${{ env.artifactCacheKey }}
 
         - name: Download Project Dependencies
           id: DownloadProjectDependencies
@@ -126,6 +127,7 @@ jobs:
           with:
             shell: ${{ inputs.shell }}
             parentTelemetryScopeJson: ${{ inputs.parentTelemetryScopeJson }}
+            artifact: ${{ env.artifact }}
             project: ${{ inputs.project }}
             buildMode: ${{ inputs.buildMode }}
             installAppsJson: ${{ steps.DownloadProjectDependencies.outputs.DownloadedApps }}
@@ -174,7 +176,7 @@ jobs:
           uses: actions/upload-artifact@v3
           if: inputs.publishArtifacts
           with:
-            name: ${{ env.AppsArtifactsName }}
+            name: ${{ steps.calculateArtifactsNames.outputs.AppsArtifactsName }}
             path: '${{ inputs.project }}/.buildartifacts/Apps/'
             if-no-files-found: ignore
 
@@ -182,7 +184,7 @@ jobs:
           uses: actions/upload-artifact@v3
           if: inputs.publishArtifacts
           with:
-            name: ${{ env.DependenciesArtifactsName }}
+            name: ${{ steps.calculateArtifactsNames.outputs.DependenciesArtifactsName }}
             path: '${{ inputs.project }}/.buildartifacts/Dependencies/'
             if-no-files-found: ignore
 
@@ -190,7 +192,7 @@ jobs:
           uses: actions/upload-artifact@v3
           if: inputs.publishArtifacts
           with:
-            name: ${{ env.TestAppsArtifactsName }}
+            name: ${{ steps.calculateArtifactsNames.outputs.TestAppsArtifactsName }}
             path: '${{ inputs.project }}/.buildartifacts/TestApps/'
             if-no-files-found: ignore
 
@@ -198,7 +200,7 @@ jobs:
           uses: actions/upload-artifact@v3
           if: (success() || failure()) && (hashFiles(format('{0}/BuildOutput.txt',inputs.project)) != '')
           with:
-            name: ${{ env.BuildOutputArtifactsName }}
+            name: ${{ steps.calculateArtifactsNames.outputs.BuildOutputArtifactsName }}
             path: '${{ inputs.project }}/BuildOutput.txt'
             if-no-files-found: ignore
 
@@ -206,7 +208,7 @@ jobs:
           uses: actions/upload-artifact@v3
           if: (failure()) && (hashFiles(format('{0}/ContainerEventLog.evtx',inputs.project)) != '')
           with:
-            name: ${{ env.ContainerEventLogArtifactsName }}
+            name: ${{ steps.calculateArtifactsNames.outputs.ContainerEventLogArtifactsName }}
             path: '${{ inputs.project }}/ContainerEventLog.evtx'
             if-no-files-found: ignore
 
@@ -214,7 +216,7 @@ jobs:
           uses: actions/upload-artifact@v3
           if: (success() || failure()) && (hashFiles(format('{0}/TestResults.xml',inputs.project)) != '')
           with:
-            name: ${{ env.TestResultsArtifactsName }}
+            name: ${{ steps.calculateArtifactsNames.outputs.TestResultsArtifactsName }}
             path: '${{ inputs.project }}/TestResults.xml'
             if-no-files-found: ignore
 
