@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/freddydk/AL-Go@OnlyNeededSecrets",
+  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
