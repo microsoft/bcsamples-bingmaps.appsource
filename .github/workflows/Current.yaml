@@ -36,14 +36,14 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@ApiVersion
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@enverr
         with:
           shell: pwsh
           eventId: "DO0101"
 
       - name: Read settings
         id: ReadSettings
-        uses: freddydk/AL-Go/Actions/ReadSettings@ApiVersion
+        uses: freddydk/AL-Go/Actions/ReadSettings@enverr
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -55,7 +55,7 @@ jobs:
       
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: freddydk/AL-Go/Actions/DetermineProjectsToBuild@ApiVersion
+        uses: freddydk/AL-Go/Actions/DetermineProjectsToBuild@enverr
         with:
           shell: pwsh
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -91,7 +91,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@ApiVersion
+        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@enverr
         with:
           shell: pwsh
           eventId: "DO0101"

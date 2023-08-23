@@ -39,7 +39,7 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@ApiVersion
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@enverr
         with:
           shell: pwsh
           eventId: "DO0103"
@@ -53,35 +53,20 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@ApiVersion
+        uses: freddydk/AL-Go/Actions/ReadSettings@enverr
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
 
       - name: Read secrets
-        uses: freddydk/AL-Go/Actions/ReadSecrets@ApiVersion
+        uses: freddydk/AL-Go/Actions/ReadSecrets@enverr
         with:
           shell: pwsh
           gitHubSecrets: ${{ toJson(secrets) }}
           getSecrets: 'appSourceContext'
 
-      - name: DeliveryContext
-        id: deliveryContext
-        run: |
-          $errorActionPreference = "Stop"; $ProgressPreference = "SilentlyContinue"; Set-StrictMode -Version 2.0
-          $secrets = $env:Secrets | ConvertFrom-Json
-          if ($secrets.appSourceContext) {
-            $deliveryContext = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($secrets.appSourceContext))
-            Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "deliveryContext=$deliveryContext"
-          }
-          else {
-            throw "appSourceContext secret is missing"
-          }
-
       - name: Deliver
-        uses: freddydk/AL-Go/Actions/Deliver@ApiVersion
-        env:
-          deliveryContext: '${{ steps.deliveryContext.outputs.deliveryContext }}'
+        uses: freddydk/AL-Go/Actions/Deliver@enverr
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
@@ -101,7 +86,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@ApiVersion
+        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@enverr
         with:
           shell: pwsh
           eventId: "DO0103"

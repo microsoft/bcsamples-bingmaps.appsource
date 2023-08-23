@@ -41,20 +41,20 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@ApiVersion
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@enverr
         with:
           shell: pwsh
           eventId: "DO0096"
 
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@ApiVersion
+        uses: freddydk/AL-Go/Actions/ReadSettings@enverr
         if: github.event.inputs.useGhTokenWorkflow == 'true'
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
 
       - name: Read secrets
-        uses: freddydk/AL-Go/Actions/ReadSecrets@ApiVersion
+        uses: freddydk/AL-Go/Actions/ReadSecrets@enverr
         if: github.event.inputs.useGhTokenWorkflow == 'true'
         with:
           shell: pwsh
@@ -80,7 +80,7 @@ jobs:
           Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "ghToken=$ghToken"
 
       - name: Increment Version Number
-        uses: freddydk/AL-Go/Actions/IncrementVersionNumber@ApiVersion
+        uses: freddydk/AL-Go/Actions/IncrementVersionNumber@enverr
         with:
           shell: pwsh
           token: ${{ steps.CalculateToken.outputs.ghToken }}
@@ -91,7 +91,7 @@ jobs:
   
       - name: Finalize the workflow
         if: always()
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@ApiVersion
+        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@enverr
         with:
           shell: pwsh
           eventId: "DO0096"
