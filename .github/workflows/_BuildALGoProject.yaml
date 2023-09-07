@@ -23,6 +23,10 @@ on:
         description: Name of the built project
         required: true
         type: string
+      projectName:
+        description: Friendly name of the built project
+        required: true
+        type: string
       projectDependenciesJson:
         description: Dependencies of the built project in compressed Json format
         required: false
@@ -74,7 +78,7 @@ env:
 jobs:
   BuildALGoProject:
     runs-on: ${{ fromJson(inputs.runsOn) }}
-    name: ${{ inputs.project }} - ${{ inputs.buildMode }}
+    name: ${{ inputs.projectName }} (${{ inputs.buildMode }})
     steps:
         - name: Checkout
           uses: actions/checkout@v3
@@ -83,7 +87,7 @@ jobs:
             lfs: true
 
         - name: Read settings
-          uses: freddydk/AL-Go/Actions/ReadSettings@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/ReadSettings@main
           with:
             shell: ${{ inputs.shell }}
             project: ${{ inputs.project }}
@@ -92,14 +96,14 @@ jobs:
         - name: Read secrets
           id: ReadSecrets
           if: github.event_name != 'pull_request'
-          uses: freddydk/AL-Go/Actions/ReadSecrets@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/ReadSecrets@main
           with:
             shell: ${{ inputs.shell }}
             gitHubSecrets: ${{ toJson(secrets) }}
             getSecrets: '${{ inputs.secrets }},appDependencyProbingPathsSecrets'
 
         - name: Determine ArtifactUrl
-          uses: freddydk/AL-Go/Actions/DetermineArtifactUrl@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/DetermineArtifactUrl@main
           id: determineArtifactUrl
           env:
             Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
@@ -117,7 +121,7 @@ jobs:
 
         - name: Download Project Dependencies
           id: DownloadProjectDependencies
-          uses: freddydk/AL-Go/Actions/DownloadProjectDependencies@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/DownloadProjectDependencies@main
           env:
             Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
           with:
@@ -128,7 +132,7 @@ jobs:
 
         - name: Run pipeline
           id: RunPipeline
-          uses: freddydk/AL-Go/Actions/RunPipeline@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/RunPipeline@main
           env:
             Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
             BuildMode: ${{ inputs.buildMode }}
@@ -144,7 +148,7 @@ jobs:
         - name: Sign
           if: inputs.signArtifacts && env.doNotSignApps == 'False' && env.keyVaultCodesignCertificateName != ''
           id: sign
-          uses: freddydk/AL-Go/Actions/Sign@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/Sign@main
           with:
             shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
             azureCredentialsJson: ${{ secrets.AZURE_CREDENTIALS }}
@@ -153,7 +157,7 @@ jobs:
 
         - name: Calculate Artifact names
           id: calculateArtifactsNames
-          uses: freddydk/AL-Go/Actions/CalculateArtifactNames@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/CalculateArtifactNames@main
           if: success() || failure()
           with:
             shell: ${{ inputs.shell }}
@@ -232,14 +236,14 @@ jobs:
           uses: actions/upload-artifact@v3
           if: (success() || failure()) && (hashFiles(format('{0}/bcptTestResults.json',inputs.project)) != '')
           with:
-            name: ${{ env.BcptTestResultsArtifactsName }}
+            name: ${{ steps.calculateArtifactsNames.outputs.BcptTestResultsArtifactsName }}
             path: '${{ inputs.project }}/bcptTestResults.json'
             if-no-files-found: ignore
 
         - name: Analyze Test Results
           id: analyzeTestResults
           if: success() || failure()
-          uses: freddydk/AL-Go/Actions/AnalyzeTests@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/AnalyzeTests@main
           with:
             shell: ${{ inputs.shell }}
             parentTelemetryScopeJson: ${{ inputs.parentTelemetryScopeJson }}
@@ -247,7 +251,7 @@ jobs:
 
         - name: Cleanup
           if: always()
-          uses: freddydk/AL-Go/Actions/PipelineCleanup@PSScriptAnalyzer
+          uses: freddydk/AL-Go/Actions/PipelineCleanup@main
           with:
             shell: ${{ inputs.shell }}
             parentTelemetryScopeJson: ${{ inputs.parentTelemetryScopeJson }}
