@@ -10,5 +10,6 @@
     "CreateApp.yaml",
     "CreateTestApp.yaml",
     "CreatePerformanceTestApp.yaml"
-  ]
+  ],
+  "BcContainerHelperVersion": "latest"
 }
