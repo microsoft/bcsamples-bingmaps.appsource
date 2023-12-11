@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/freddydk/AL-Go@checkSecrets",
+  "templateUrl": "https://github.com/freddydk/AL-Go@bcptreport",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
@@ -12,5 +12,5 @@
     "CreatePerformanceTestApp.yaml"
   ],
   "BcContainerHelperVersion": "latest",
-  "templateSha": "cd535cc6893e8def329156a7679b2d7cbd214c11"
+  "templateSha": "10f98f2810aebb6f5ca54180a2d794ee24d7f15f"
 }
