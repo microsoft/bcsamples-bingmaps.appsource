@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       templateUrl:
-        description: Template Repository URL (current is https://github.com/freddydk/AL-Go@nuget)
+        description: Template Repository URL (current is https://github.com/microsoft/AL-Go-AppSource@preview)
         required: false
         default: ''
       downloadLatest:
@@ -33,29 +33,29 @@ jobs:
     runs-on: [ windows-latest ]
     steps:
       - name: Dump Workflow Information
-        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@nuget
+        uses: microsoft/AL-Go/Actions/DumpWorkflowInfo@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: powershell
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@nuget
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: powershell
           eventId: "DO0098"
 
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@nuget
+        uses: microsoft/AL-Go/Actions/ReadSettings@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: powershell
           get: templateUrl
 
       - name: Read secrets
         id: ReadSecrets
-        uses: freddydk/AL-Go/Actions/ReadSecrets@nuget
+        uses: microsoft/AL-Go/Actions/ReadSecrets@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: powershell
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -91,7 +91,7 @@ jobs:
           Add-Content -Encoding UTF8 -Path $env:GITHUB_ENV -Value "downloadLatest=$downloadLatest"
 
       - name: Update AL-Go system files
-        uses: freddydk/AL-Go/Actions/CheckForUpdates@nuget
+        uses: microsoft/AL-Go/Actions/CheckForUpdates@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: powershell
           token: ${{ fromJson(steps.ReadSecrets.outputs.Secrets).ghTokenWorkflow }}
@@ -102,7 +102,7 @@ jobs:
 
       - name: Finalize the workflow
         if: always()
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@nuget
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: powershell
           eventId: "DO0098"

@@ -27,6 +27,10 @@ on:
         description: Create Release Branch?
         type: boolean
         default: false
+      releaseBranchPrefix:
+        description: The prefix for the release branch. Used only if 'Create Release Branch?' is checked.
+        type: string
+        default: release/
       updateVersionNumber:
         description: New Version Number in main branch. Use Major.Minor for absolute change, use +Major.Minor for incremental change.
         required: false
@@ -64,38 +68,38 @@ jobs:
       artifacts: ${{ steps.analyzeartifacts.outputs.artifacts }}
       releaseId: ${{ steps.createrelease.outputs.releaseId }}
       commitish: ${{ steps.analyzeartifacts.outputs.commitish }}
-      releaseBranch: ${{ steps.createreleasenotes.outputs.releaseBranch }}
+      releaseVersion: ${{ steps.createreleasenotes.outputs.releaseVersion }}
     steps:
       - name: Dump Workflow Information
-        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@nuget
+        uses: microsoft/AL-Go/Actions/DumpWorkflowInfo@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@nuget
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           eventId: "DO0094"
 
       - name: Read settings
         id: ReadSettings
-        uses: freddydk/AL-Go/Actions/ReadSettings@nuget
+        uses: microsoft/AL-Go/Actions/ReadSettings@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           get: templateUrl,repoName
 
       - name: Determine Projects
         id: determineProjects
-        uses: freddydk/AL-Go/Actions/DetermineProjectsToBuild@nuget
+        uses: microsoft/AL-Go/Actions/DetermineProjectsToBuild@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
 
       - name: Check for updates to AL-Go system files
-        uses: freddydk/AL-Go/Actions/CheckForUpdates@nuget
+        uses: microsoft/AL-Go/Actions/CheckForUpdates@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           templateUrl: ${{ env.templateUrl }}
@@ -180,7 +184,7 @@ jobs:
 
       - name: Prepare release notes
         id: createreleasenotes
-        uses: freddydk/AL-Go/Actions/CreateReleaseNotes@nuget
+        uses: microsoft/AL-Go/Actions/CreateReleaseNotes@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -188,7 +192,7 @@ jobs:
           target_commitish: ${{ steps.analyzeartifacts.outputs.commitish }}
 
       - name: Create release
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         id: createrelease
         env:
           bodyMD: ${{ steps.createreleasenotes.outputs.releaseNotes }}
@@ -220,16 +224,16 @@ jobs:
       fail-fast: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@nuget
+        uses: microsoft/AL-Go/Actions/ReadSettings@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
 
       - name: Read secrets
         id: ReadSecrets
-        uses: freddydk/AL-Go/Actions/ReadSecrets@nuget
+        uses: microsoft/AL-Go/Actions/ReadSecrets@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -247,7 +251,7 @@ jobs:
           Invoke-WebRequest -UseBasicParsing -Headers $headers -Uri '${{ matrix.url }}' -OutFile '${{ matrix.name }}.zip'
 
       - name: Upload release artifacts
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         env:
           releaseId: ${{ needs.createrelease.outputs.releaseId }}
         with:
@@ -266,7 +270,7 @@ jobs:
             });
 
       - name: Deliver to NuGet
-        uses: freddydk/AL-Go/Actions/Deliver@nuget
+        uses: microsoft/AL-Go/Actions/Deliver@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         if: ${{ fromJson(steps.ReadSecrets.outputs.Secrets).nuGetContext != '' }}
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
@@ -279,7 +283,7 @@ jobs:
           atypes: 'Apps,TestApps'
 
       - name: Deliver to Storage
-        uses: freddydk/AL-Go/Actions/Deliver@nuget
+        uses: microsoft/AL-Go/Actions/Deliver@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         if: ${{ fromJson(steps.ReadSecrets.outputs.Secrets).storageContext != '' }}
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
@@ -297,18 +301,22 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: '${{ needs.createRelease.outputs.commitish }}'
 
       - name: Create Release Branch
+        env:
+          releaseBranchPrefix: ${{ github.event.inputs.releaseBranchPrefix }}
         run: |
           $errorActionPreference = "Stop"; $ProgressPreference = "SilentlyContinue"; Set-StrictMode -Version 2.0
-          git checkout -b ${{ needs.CreateRelease.outputs.releaseBranch }}
+          $releaseBranch = "$($env:releaseBranchPrefix)" + "${{ needs.CreateRelease.outputs.releaseVersion }}"
+          Write-Host "Creating release branch $releaseBranch"
+          git checkout -b $releaseBranch
           git config user.name ${{ github.actor}}
           git config user.email ${{ github.actor}}@users.noreply.github.com
-          git commit --allow-empty -m "Release branch ${{ needs.CreateRelease.outputs.releaseBranch }}"
-          git push origin ${{ needs.CreateRelease.outputs.releaseBranch }}
+          git commit --allow-empty -m "Release branch $releaseBranch"
+          git push origin $releaseBranch
 
   UpdateVersionNumber:
     needs: [ CreateRelease, UploadArtifacts ]
@@ -316,13 +324,13 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@nuget
+        uses: microsoft/AL-Go/Actions/ReadSettings@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
 
       - name: Read secrets
         id: ReadSecrets
-        uses: freddydk/AL-Go/Actions/ReadSecrets@nuget
+        uses: microsoft/AL-Go/Actions/ReadSecrets@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           gitHubSecrets: ${{ toJson(secrets) }}
@@ -330,7 +338,7 @@ jobs:
           useGhTokenWorkflowForPush: '${{ github.event.inputs.useGhTokenWorkflow }}'
 
       - name: Update Version Number
-        uses: freddydk/AL-Go/Actions/IncrementVersionNumber@nuget
+        uses: microsoft/AL-Go/Actions/IncrementVersionNumber@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           token: ${{ steps.ReadSecrets.outputs.TokenForPush }}
@@ -344,11 +352,11 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@nuget
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@4c5bfbca1adebbf997f63882df4b9074a19aac1d
         with:
           shell: pwsh
           eventId: "DO0094"

@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/freddydk/AL-Go@nuget",
+  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
@@ -12,5 +12,5 @@
     "CreatePerformanceTestApp.yaml"
   ],
   "BcContainerHelperVersion": "latest",
-  "templateSha": "679d5cf17e51b1cd558453f429df6e59bf2ce95c"
+  "templateSha": "aa4520be9aafac779e03b94b5c1dd223a138a0a5"
 }
