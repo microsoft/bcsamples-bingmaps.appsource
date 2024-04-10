@@ -1,9 +1,9 @@
 {
-  "id": "4270bff7-c860-434f-b09a-0f3e37d243fd",
-  "name": "BingMaps.AppSource",
+  "id": "3fb011e8-1265-4b75-b527-fa8e8e512aec",
+  "name": "BingMaps.Common",
   "publisher": "Freddy Kristiansen",
-  "brief": "BingMaps Integration",
-  "description": "BingMaps Integration App with geocode functionality and map control",
+  "brief": "BingMaps Common",
+  "description": "BingMaps Common App",
   "version": "4.2.0.0",
   "privacyStatement": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
   "EULA": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
@@ -11,25 +11,19 @@
   "url": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
   "contextSensitiveHelpUrl": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
   "logo": "bingmaps256x240.png",
-  "dependencies": [
-    {
-      "id": "3fb011e8-1265-4b75-b527-fa8e8e512aec",
-      "name": "BingMaps.Common",
-      "publisher": "Freddy Kristiansen",
-      "version": "4.2.0.0"
-    }
-  ],
+  "dependencies": [],
   "screenshots": [],
   "platform": "20.0.0.0",
   "application": "20.0.0.0",
   "idRanges": [
     {
-      "from": 70074119,
+      "from": 70074129,
       "to": 70074129
     }
   ],
   "features": [
-    "TranslationFile"
+    "TranslationFile",
+    "NoImplicitWith"
   ],
   "resourceExposurePolicy": {
     "allowDebugging": true,
@@ -37,10 +31,5 @@
     "includeSourceInSymbolFile": true
   },
   "target": "Cloud",
-  "supportedLocales": [
-    "en-US"
-  ],
-  "runtime": "8.0",
-  "keyVaultUrls": [],
-  "applicationInsightsConnectionString": "InstrumentationKey=84bd9223-67d4-4378-8590-9e4a46023be2;IngestionEndpoint=https://westeurope-1.in.applicationinsights.azure.com/"
+  "runtime": "8.0"
 }
