@@ -4,7 +4,7 @@
   "publisher": "Freddy Kristiansen",
   "brief": "",
   "description": "",
-  "version": "4.2.0.0",
+  "version": "4.3.0.0",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
@@ -33,7 +33,7 @@
       "id": "4270bff7-c860-434f-b09a-0f3e37d243fd",
       "publisher": "Freddy Kristiansen",
       "name": "BingMaps.AppSource",
-      "version": "1.0.0.0"
+      "version": "4.3.0.0"
     }
   ],
   "screenshots": [],
