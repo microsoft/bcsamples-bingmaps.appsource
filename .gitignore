@@ -1,4 +1,5 @@
 *.app
+!dependencies/*.app
 *.flf
 *.bclicense
 *.g.xlf
