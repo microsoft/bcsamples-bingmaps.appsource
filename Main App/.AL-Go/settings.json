@@ -1,9 +1,6 @@
 {
   "country": "us",
   "VersioningStrategy": 16,
-  "xKeyVaultCertificateUrlSecretName": "KeyVaultCertificateFile",
-  "xKeyVaultCertificatePasswordSecretName": "KeyVaultCertificatePassword",
-  "xKeyVaultClientIdSecretName": "KeyVaultClientId",
   "CodeSignCertificateUrlSecretName": "CodeSignCertificateUrl",
   "CodeSignCertificatePasswordSecretName": "CodeSignCertificatePassword",
   "appSourceCopMandatoryAffixes": [
@@ -14,11 +11,8 @@
     "continuousDelivery": true,
     "includeDependencies": [
       "Freddy Kristiansen_*.app"
-    ],
+    ]
   },
-  "InstallApps": [
-    "Dependencies/Freddy Kristiansen_BingMaps.Common_4.2.40.0.app"
-  ],
   "generateDependencyArtifact": true,
   "RepoVersion": "4.2"
 }

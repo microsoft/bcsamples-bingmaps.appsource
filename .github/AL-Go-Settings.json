@@ -11,6 +11,6 @@
     "CreateTestApp.yaml",
     "CreatePerformanceTestApp.yaml"
   ],
-  "BcContainerHelperVersion": "latest",
+  "useProjectDependencies": true,
   "templateSha": "d1b8463aa48451bc1e974930c4c7ed66b7940685"
 }

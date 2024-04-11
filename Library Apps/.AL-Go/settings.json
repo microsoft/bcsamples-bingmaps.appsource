@@ -1,0 +1,11 @@
+{
+  "country": "us",
+  "VersioningStrategy": 16,
+  "CodeSignCertificateUrlSecretName": "CodeSignCertificateUrl",
+  "CodeSignCertificatePasswordSecretName": "CodeSignCertificatePassword",
+  "appSourceCopMandatoryAffixes": [
+    "BIN"
+  ],
+  "generateDependencyArtifact": true,
+  "RepoVersion": "4.2"
+}
