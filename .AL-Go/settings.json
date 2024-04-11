@@ -6,11 +6,14 @@
   "xKeyVaultClientIdSecretName": "KeyVaultClientId",
   "CodeSignCertificateUrlSecretName": "CodeSignCertificateUrl",
   "CodeSignCertificatePasswordSecretName": "CodeSignCertificatePassword",
-  "AppSourceCopMandatoryAffixes": [
+  "appSourceCopMandatoryAffixes": [
     "BIN"
   ],
-  "AppSourceProductId": "5fbe0803-a545-4504-b41a-d9d158112360",
-  "AppSourceContinuousDelivery": true,
+  "appSourceProductId": "5fbe0803-a545-4504-b41a-d9d158112360",
+  "appSourceContinuousDelivery": true,
+  "appSourceIncludeDependencies": [
+    "Freddy Kristiansen_*.app"
+  ],
   "InstallApps": [
     "Dependencies/Freddy Kristiansen_BingMaps.Common_4.2.40.0.app"
   ],
