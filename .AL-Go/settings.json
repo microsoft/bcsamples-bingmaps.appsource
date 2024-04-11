@@ -14,5 +14,6 @@
   "InstallApps": [
     "Dependencies/Freddy Kristiansen_BingMaps.Common_4.2.40.0.app"
   ],
+  "generateDependencyArtifact": true,
   "RepoVersion": "4.2"
 }
