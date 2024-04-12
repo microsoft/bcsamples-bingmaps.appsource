@@ -141,7 +141,6 @@ jobs:
             $refname = "$ENV:GITHUB_REF_NAME".Replace('/','_')
             Write-Host "Analyzing artifacts for project $project"
             $appVersion = '${{ github.event.inputs.appVersion }}'
-            $allArtifacts | ForEach-Object { Write-Host $_.name }
             if ($appVersion -eq "latest") {
               Write-Host "Grab latest"
               $artifact = $allArtifacts | Where-Object { $_.name -like "$project-$refname-Apps-*" } | Select-Object -First 1
@@ -199,7 +198,7 @@ jobs:
         env:
           bodyMD: ${{ steps.createreleasenotes.outputs.releaseNotes }}
         with:
-          github-token: ${{ secrets.GHTOKENWORKFLOW }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             var bodyMD = process.env.bodyMD
             const createReleaseResponse = await github.rest.repos.createRelease({
@@ -239,7 +238,8 @@ jobs:
         with:
           shell: pwsh
           gitHubSecrets: ${{ toJson(secrets) }}
-          getSecrets: 'nuGetContext,storageContext'
+          getSecrets: 'nuGetContext,storageContext,TokenForPush'
+          useGhTokenWorkflowForPush: '${{ github.event.inputs.useGhTokenWorkflow }}'
 
       - name: Download artifact
         run: |
@@ -257,7 +257,7 @@ jobs:
         env:
           releaseId: ${{ needs.createrelease.outputs.releaseId }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.ReadSecrets.outputs.TokenForPush }}
           script: |
             const releaseId = process.env.releaseId
             const assetPath = '${{ matrix.name }}.zip'
