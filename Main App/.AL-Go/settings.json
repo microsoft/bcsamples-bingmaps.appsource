@@ -8,7 +8,7 @@
   ],
   "deliverToAppSource": {
     "productId": "5fbe0803-a545-4504-b41a-d9d158112360",
-    "continuousDelivery": false,
+    "continuousDelivery": true,
     "mainAppFolder": "BingMaps-AppSource",
     "includeDependencies": [
       "Freddy Kristiansen_*.app"
