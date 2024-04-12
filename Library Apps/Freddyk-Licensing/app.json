@@ -1,10 +1,10 @@
 {
   "id": "93ef78d0-3805-484b-ab3d-a72ef2b1ea9c",
-  "name": "BingMaps.Licensing",
+  "name": "FreddyDK.Licensing",
   "publisher": "Freddy Kristiansen",
   "version": "4.7.0.0",
-  "brief": "BingMaps Licensing",
-  "description": "BingMaps Licensing App",
+  "brief": "FreddyDK Licensing",
+  "description": "FreddyDK Licensing App",
   "privacyStatement": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
   "EULA": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
   "help": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
