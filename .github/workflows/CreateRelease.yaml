@@ -199,7 +199,7 @@ jobs:
         env:
           bodyMD: ${{ steps.createreleasenotes.outputs.releaseNotes }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GHTOKENWORKFLOW }}
           script: |
             var bodyMD = process.env.bodyMD
             const createReleaseResponse = await github.rest.repos.createRelease({
