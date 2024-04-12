@@ -141,6 +141,7 @@ jobs:
             $refname = "$ENV:GITHUB_REF_NAME".Replace('/','_')
             Write-Host "Analyzing artifacts for project $project"
             $appVersion = '${{ github.event.inputs.appVersion }}'
+            $allArtifacts | ForEach-Object { Write-Host $_.name }
             if ($appVersion -eq "latest") {
               Write-Host "Grab latest"
               $artifact = $allArtifacts | Where-Object { $_.name -like "$project-$refname-Apps-*" } | Select-Object -First 1
