@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 defaults:
   run:
@@ -31,7 +32,7 @@ jobs:
       workflowDepth: ${{ steps.DetermineWorkflowDepth.outputs.WorkflowDepth }}
     steps:
       - name: Dump Workflow Information
-        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@issue1009
+        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@quickfixes
         with:
           shell: pwsh
 
@@ -42,14 +43,14 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@issue1009
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@quickfixes
         with:
           shell: pwsh
           eventId: "DO0101"
 
       - name: Read settings
         id: ReadSettings
-        uses: freddydk/AL-Go/Actions/ReadSettings@issue1009
+        uses: freddydk/AL-Go/Actions/ReadSettings@quickfixes
         with:
           shell: pwsh
 
@@ -60,7 +61,7 @@ jobs:
 
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: freddydk/AL-Go/Actions/DetermineProjectsToBuild@issue1009
+        uses: freddydk/AL-Go/Actions/DetermineProjectsToBuild@quickfixes
         with:
           shell: pwsh
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -119,7 +120,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@issue1009
+        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@quickfixes
         with:
           shell: pwsh
           eventId: "DO0101"

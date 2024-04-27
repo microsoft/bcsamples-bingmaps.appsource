@@ -35,7 +35,7 @@ jobs:
       deviceCode: ${{ steps.Authenticate.outputs.deviceCode }}
     steps:
       - name: Dump Workflow Information
-        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@issue1009
+        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@quickfixes
         with:
           shell: pwsh
 
@@ -44,20 +44,20 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@issue1009
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@quickfixes
         with:
           shell: pwsh
           eventId: "DO0097"
 
       - name: Read settings
         id: ReadSettings
-        uses: freddydk/AL-Go/Actions/ReadSettings@issue1009
+        uses: freddydk/AL-Go/Actions/ReadSettings@quickfixes
         with:
           shell: pwsh
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: freddydk/AL-Go/Actions/DetermineDeploymentEnvironments@issue1009
+        uses: freddydk/AL-Go/Actions/DetermineDeploymentEnvironments@quickfixes
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -75,7 +75,7 @@ jobs:
 
       - name: Read secrets
         id: ReadSecrets
-        uses: freddydk/AL-Go/Actions/ReadSecrets@issue1009
+        uses: freddydk/AL-Go/Actions/ReadSecrets@quickfixes
         if: steps.DetermineDeploymentEnvironments.outputs.UnknownEnvironment == 1
         with:
           shell: pwsh
@@ -107,7 +107,7 @@ jobs:
             Write-Host "No AuthContext provided for $envName, initiating Device Code flow"
             $ALGoHelperPath = "$([System.IO.Path]::GetTempFileName()).ps1"
             $webClient = New-Object System.Net.WebClient
-            $webClient.DownloadFile('https://raw.githubusercontent.com/freddydk/AL-Go/issue1009/Actions/AL-Go-Helper.ps1', $ALGoHelperPath)
+            $webClient.DownloadFile('https://raw.githubusercontent.com/freddydk/AL-Go/quickfixes/Actions/AL-Go-Helper.ps1', $ALGoHelperPath)
             . $ALGoHelperPath
             DownloadAndImportBcContainerHelper
             $authContext = New-BcAuthContext -includeDeviceLogin -deviceLoginTimeout ([TimeSpan]::FromSeconds(0))
@@ -121,6 +121,9 @@ jobs:
     strategy: ${{ fromJson(needs.Initialization.outputs.environmentsMatrixJson) }}
     runs-on: ${{ fromJson(matrix.os) }}
     name: Deploy to ${{ matrix.environment }}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
     environment:
       name: ${{ matrix.environment }}
       url: ${{ steps.Deploy.outputs.environmentUrl }}
@@ -138,25 +141,25 @@ jobs:
           Add-Content -Encoding UTF8 -Path $env:GITHUB_OUTPUT -Value "envName=$envName"
 
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@issue1009
+        uses: freddydk/AL-Go/Actions/ReadSettings@quickfixes
         with:
-          shell: pwsh
+          shell: ${{ matrix.shell }}
 
       - name: Read secrets
         id: ReadSecrets
-        uses: freddydk/AL-Go/Actions/ReadSecrets@issue1009
+        uses: freddydk/AL-Go/Actions/ReadSecrets@quickfixes
         with:
-          shell: pwsh
+          shell: ${{ matrix.shell }}
           gitHubSecrets: ${{ toJson(secrets) }}
           getSecrets: '${{ steps.envName.outputs.envName }}-AuthContext,${{ steps.envName.outputs.envName }}_AuthContext,AuthContext,${{ steps.envName.outputs.envName }}-EnvironmentName,${{ steps.envName.outputs.envName }}_EnvironmentName,EnvironmentName,projects'
 
       - name: Deploy
         id: Deploy
-        uses: freddydk/AL-Go/Actions/Deploy@issue1009
+        uses: freddydk/AL-Go/Actions/Deploy@quickfixes
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
         with:
-          shell: pwsh
+          shell: ${{ matrix.shell }}
           environmentName: ${{ matrix.environment }}
           artifacts: ${{ github.event.inputs.appVersion }}
           type: 'Publish'
@@ -172,7 +175,7 @@ jobs:
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@issue1009
+        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@quickfixes
         with:
           shell: pwsh
           eventId: "DO0097"

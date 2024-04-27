@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   actions: read
   pages: write
   id-token: write
@@ -30,19 +30,19 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@issue1009
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@quickfixes
         with:
           shell: pwsh
           eventId: "DO0097"
         
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@issue1009
+        uses: freddydk/AL-Go/Actions/ReadSettings@quickfixes
         with:
           shell: pwsh
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: freddydk/AL-Go/Actions/DetermineDeploymentEnvironments@issue1009
+        uses: freddydk/AL-Go/Actions/DetermineDeploymentEnvironments@quickfixes
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -55,7 +55,7 @@ jobs:
         uses: actions/configure-pages@v5
         
       - name: Build Reference Documentation
-        uses: freddydk/AL-Go/Actions/BuildReferenceDocumentation@issue1009
+        uses: freddydk/AL-Go/Actions/BuildReferenceDocumentation@quickfixes
         with:
           shell: pwsh
           artifacts: 'latest'
