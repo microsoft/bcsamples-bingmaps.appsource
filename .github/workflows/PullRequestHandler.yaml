@@ -10,7 +10,7 @@ concurrency:
 
 defaults:
   run:
-    shell: pwsh
+    shell: powershell
 
 permissions:
   contents: read
@@ -27,12 +27,12 @@ jobs:
     if: (github.event.pull_request.base.repo.full_name != github.event.pull_request.head.repo.full_name) && (github.event_name != 'pull_request')
     runs-on: windows-latest
     steps:
-      - uses: freddydk/AL-Go/Actions/VerifyPRChanges@quickfixes
+      - uses: microsoft/AL-Go-Actions/VerifyPRChanges@v5.1
 
   Initialization:
     needs: [ PregateCheck ]
     if: (!failure() && !cancelled())
-    runs-on: [ ubuntu-latest ]
+    runs-on: [ windows-latest ]
     outputs:
       telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
       githubRunner: ${{ steps.ReadSettings.outputs.GitHubRunnerJson }}
@@ -44,9 +44,9 @@ jobs:
       workflowDepth: ${{ steps.DetermineWorkflowDepth.outputs.WorkflowDepth }}
     steps:
       - name: Dump Workflow Information
-        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@quickfixes
+        uses: microsoft/AL-Go-Actions/DumpWorkflowInfo@v5.1
         with:
-          shell: pwsh
+          shell: powershell
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,16 +56,16 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@quickfixes
+        uses: microsoft/AL-Go-Actions/WorkflowInitialize@v5.1
         with:
-          shell: pwsh
+          shell: powershell
           eventId: "DO0104"
 
       - name: Read settings
         id: ReadSettings
-        uses: freddydk/AL-Go/Actions/ReadSettings@quickfixes
+        uses: microsoft/AL-Go-Actions/ReadSettings@v5.1
         with:
-          shell: pwsh
+          shell: powershell
 
       - name: Determine Workflow Depth
         id: DetermineWorkflowDepth
@@ -74,9 +74,9 @@ jobs:
 
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: freddydk/AL-Go/Actions/DetermineProjectsToBuild@quickfixes
+        uses: microsoft/AL-Go-Actions/DetermineProjectsToBuild@v5.1
         with:
-          shell: pwsh
+          shell: powershell
           maxBuildDepth: ${{ env.workflowDepth }}
 
   Build1:
@@ -130,13 +130,13 @@ jobs:
   StatusCheck:
     needs: [ Initialization, Build ]
     if: (!cancelled())
-    runs-on: [ ubuntu-latest ]
+    runs-on: [ windows-latest ]
     name: Pull Request Status Check
     steps:
       - name: Pull Request Status Check
         id: PullRequestStatusCheck
-        uses: freddydk/AL-Go/Actions/PullRequestStatusCheck@quickfixes
+        uses: microsoft/AL-Go-Actions/PullRequestStatusCheck@v5.1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          shell: pwsh
+          shell: powershell
