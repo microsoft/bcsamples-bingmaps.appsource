@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@main",
+  "templateUrl": "https://github.com/freddydk/AL-Go@PPP",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
@@ -12,5 +12,5 @@
     "CreatePerformanceTestApp.yaml"
   ],
   "useProjectDependencies": true,
-  "templateSha": "bf05ca89f5e08889a1d14f9a150356f141b5a632"
+  "templateSha": "ad100ede8bd5550696d0279cc593fa6430093640"
 }
