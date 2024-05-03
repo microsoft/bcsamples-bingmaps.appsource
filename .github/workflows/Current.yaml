@@ -111,7 +111,7 @@ jobs:
       artifactsNameSuffix: 'Current'
 
   PostProcess:
-    needs: [ Initialization, Build ]
+    needs: [ Initialization, Build1, Build ]
     if: always()
     runs-on: [ ubuntu-latest ]
     steps:
