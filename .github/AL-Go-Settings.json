@@ -11,6 +11,8 @@
     "CreateTestApp.yaml",
     "CreatePerformanceTestApp.yaml"
   ],
+  "useCompilerFolder": true,
+  "doNotPublishApps": true,
   "useProjectDependencies": true,
   "templateSha": "fe029c8f40b8464bdbf302a87c2329e560e0dc6b"
 }
