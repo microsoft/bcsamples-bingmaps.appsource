@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/freddydk/AL-Go@PPP",
+  "templateUrl": "https://github.com/freddydk/AL-Go@issue1093",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
@@ -14,5 +14,5 @@
   "useCompilerFolder": true,
   "doNotPublishApps": true,
   "useProjectDependencies": true,
-  "templateSha": "fe029c8f40b8464bdbf302a87c2329e560e0dc6b"
+  "templateSha": "31e49ae8d3eacf8fe4098fa1c0ed1ce8dbc6d43f"
 }
