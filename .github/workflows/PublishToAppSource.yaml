@@ -77,8 +77,6 @@ jobs:
         uses: freddydk/AL-Go/Actions/Deliver@issue1093
         env:
           Secrets: '${{ steps.ReadSecrets.outputs.Secrets }}'
-          ACTIONS_ID_TOKEN_REQUEST_TOKEN: '${{ env.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}'
-          ACTIONS_ID_TOKEN_REQUEST_URL: '${{ env.ACTIONS_ID_TOKEN_REQUEST_URL }}'
         with:
           shell: pwsh
           parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
