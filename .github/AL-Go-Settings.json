@@ -15,5 +15,5 @@
   "doNotPublishApps": true,
   "useProjectDependencies": true,
   "keyVaultCodesignCertificateName": "FreddyKristiansen",
-  "templateSha": "47336e080b61a5836ad059ee402fb923a3f4ef13"
+  "templateSha": "ae231c6d035b239c02caf9db6bbbc083b37f5650"
 }
