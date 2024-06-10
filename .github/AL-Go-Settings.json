@@ -11,6 +11,12 @@
     "CreateTestApp.yaml",
     "CreatePerformanceTestApp.yaml"
   ],
+  "deliverToAppSource": {
+    "branches": [
+      "main",
+      "e2e"
+    ],
+  },
   "useCompilerFolder": true,
   "doNotPublishApps": true,
   "useProjectDependencies": true,
