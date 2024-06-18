@@ -20,6 +20,6 @@
   "useCompilerFolder": true,
   "doNotPublishApps": true,
   "useProjectDependencies": true,
-  "keyVaultCodesignCertificateName": "FreddyKristiansen",
+  "xkeyVaultCodesignCertificateName": "FreddyKristiansen",
   "templateSha": "ff71d9d11abb6ae3d75047d25ec32ac14d361948"
 }
