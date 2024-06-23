@@ -28,12 +28,13 @@ page 70074124 "BingMaps Customer"
                 field(city; Rec.City)
                 {
                     ApplicationArea = All;
-                }
+                }q
                 field(country; Rec."Country/Region Code")
                 {
                     ApplicationArea = All;
                 }
                 field(phone; Rec."Phone No.")
+                qqeqeqe
                 {
                     ApplicationArea = All;
                 }
