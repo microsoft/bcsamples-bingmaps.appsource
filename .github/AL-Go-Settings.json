@@ -19,7 +19,7 @@
   },
   "useCompilerFolder": true,
   "doNotPublishApps": true,
-  "AZURE_CREDENTIALSSecretName": "AZURE_CREDENTIALSxxx",
+  "AZURE_CREDENTIALSSecretName": "AZURE_CREDENTIALS",
   "useProjectDependencies": true,
   "keyVaultCodesignCertificateName": "FreddyKristiansen",
   "templateSha": "f861a7b57d579f1d8aba911c577abeab8d1dd509"
