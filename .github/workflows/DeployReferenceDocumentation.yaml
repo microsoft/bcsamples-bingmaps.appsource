@@ -30,41 +30,41 @@ jobs:
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@issue1093
+        uses: freddydk/AL-Go/Actions/WorkflowInitialize@issue1098
         with:
           shell: pwsh
           eventId: "DO0097"
-        
+
       - name: Read settings
-        uses: freddydk/AL-Go/Actions/ReadSettings@issue1093
+        uses: freddydk/AL-Go/Actions/ReadSettings@issue1098
         with:
           shell: pwsh
 
       - name: Determine Deployment Environments
         id: DetermineDeploymentEnvironments
-        uses: freddydk/AL-Go/Actions/DetermineDeploymentEnvironments@issue1093
+        uses: freddydk/AL-Go/Actions/DetermineDeploymentEnvironments@issue1098
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           shell: pwsh
           getEnvironments: 'github-pages'
           type: 'Publish'
-            
+
       - name: Setup Pages
         if: steps.DetermineDeploymentEnvironments.outputs.deployALDocArtifact == 1
         uses: actions/configure-pages@v5
-        
+
       - name: Build Reference Documentation
-        uses: freddydk/AL-Go/Actions/BuildReferenceDocumentation@issue1093
+        uses: freddydk/AL-Go/Actions/BuildReferenceDocumentation@issue1098
         with:
           shell: pwsh
           artifacts: 'latest'
-        
+
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ".aldoc/_site/"
-        
+
       - name: Deploy to GitHub Pages
         if: steps.DetermineDeploymentEnvironments.outputs.deployALDocArtifact == 1
         id: deployment

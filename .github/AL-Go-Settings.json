@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/freddydk/AL-Go@issue1093",
+  "templateUrl": "https://github.com/freddydk/AL-Go@issue1098",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
@@ -21,5 +21,5 @@
   "doNotPublishApps": true,
   "useProjectDependencies": true,
   "keyVaultCodesignCertificateName": "FreddyKristiansen",
-  "templateSha": "4e6c397a8af2a8e3f7c97b2835252aaadb4b4f95"
+  "templateSha": "f861a7b57d579f1d8aba911c577abeab8d1dd509"
 }
