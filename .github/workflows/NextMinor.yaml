@@ -6,8 +6,8 @@ on:
     - cron: '0 2 * * 6'
 
 permissions:
-  contents: read
   actions: read
+  contents: read
   id-token: write
 
 defaults:
@@ -24,34 +24,33 @@ jobs:
     needs: [ ]
     runs-on: [ ubuntu-latest ]
     outputs:
-      telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
       githubRunner: ${{ steps.ReadSettings.outputs.GitHubRunnerJson }}
       githubRunnerShell: ${{ steps.ReadSettings.outputs.GitHubRunnerShell }}
       projects: ${{ steps.determineProjectsToBuild.outputs.ProjectsJson }}
       projectDependenciesJson: ${{ steps.determineProjectsToBuild.outputs.ProjectDependenciesJson }}
       buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
       workflowDepth: ${{ steps.DetermineWorkflowDepth.outputs.WorkflowDepth }}
+      telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
     steps:
       - name: Dump Workflow Information
-        uses: freddydk/AL-Go/Actions/DumpWorkflowInfo@issue1098
+        uses: microsoft/AL-Go/Actions/DumpWorkflowInfo@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         with:
           shell: pwsh
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           lfs: true
 
       - name: Initialize the workflow
         id: init
-        uses: freddydk/AL-Go/Actions/WorkflowInitialize@issue1098
+        uses: microsoft/AL-Go/Actions/WorkflowInitialize@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         with:
           shell: pwsh
-          eventId: "DO0100"
 
       - name: Read settings
         id: ReadSettings
-        uses: freddydk/AL-Go/Actions/ReadSettings@issue1098
+        uses: microsoft/AL-Go/Actions/ReadSettings@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         with:
           shell: pwsh
 
@@ -62,7 +61,7 @@ jobs:
 
       - name: Determine Projects To Build
         id: determineProjectsToBuild
-        uses: freddydk/AL-Go/Actions/DetermineProjectsToBuild@issue1098
+        uses: microsoft/AL-Go/Actions/DetermineProjectsToBuild@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
         with:
           shell: pwsh
           maxBuildDepth: ${{ env.workflowDepth }}
@@ -80,7 +79,6 @@ jobs:
     with:
       shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
       runsOn: ${{ needs.Initialization.outputs.githubRunner }}
-      parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
       project: ${{ matrix.project }}
       projectName: ${{ matrix.projectName }}
       buildMode: ${{ matrix.buildMode }}
@@ -102,7 +100,6 @@ jobs:
     with:
       shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
       runsOn: ${{ needs.Initialization.outputs.githubRunner }}
-      parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
       project: ${{ matrix.project }}
       projectName: ${{ matrix.projectName }}
       buildMode: ${{ matrix.buildMode }}
@@ -117,12 +114,14 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Finalize the workflow
         id: PostProcess
-        uses: freddydk/AL-Go/Actions/WorkflowPostProcess@issue1098
+        uses: microsoft/AL-Go/Actions/WorkflowPostProcess@6e2d05ca0fcb62e51e403cbd0539c6b1ad7f3080
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           shell: pwsh
-          eventId: "DO0100"
           telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
+          currentJobContext: ${{ toJson(job) }}
