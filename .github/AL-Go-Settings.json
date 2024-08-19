@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
+  "templateUrl": "https://github.com/freddydk/AL-Go@issue1164",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
@@ -22,5 +22,5 @@
   "AZURE_CREDENTIALSSecretName": "AZURE_CREDENTIALS",
   "useProjectDependencies": true,
   "keyVaultCodesignCertificateName": "FreddyKristiansen",
-  "templateSha": "5ccb6bf71b657339aab801a05d942161bb681434"
+  "templateSha": "38bf46e2bf03e4dfe47378fb618f29fa2926c7e1"
 }
