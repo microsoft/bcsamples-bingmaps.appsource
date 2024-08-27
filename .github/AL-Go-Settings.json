@@ -22,6 +22,5 @@
   "AZURE_CREDENTIALSSecretName": "AZURE_CREDENTIALS",
   "useProjectDependencies": true,
   "keyVaultCodesignCertificateName": "FreddyKristiansen",
-  "templateSha": "0dab6a79ceffb7a5bc6106855c373645ddc37ce7",
-  "projects": [ "Library Apps" ]
+  "templateSha": "0dab6a79ceffb7a5bc6106855c373645ddc37ce7"
 }
