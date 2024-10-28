@@ -21,6 +21,10 @@
   "doNotPublishApps": true,
   "AZURE_CREDENTIALSSecretName": "AZURE_CREDENTIALS",
   "useProjectDependencies": true,
-  "keyVaultCodesignCertificateName": "FreddyKristiansen",
+  "trustedSigning": {
+    "Endpoint": "https://neu.codesigning.azure.net",
+    "Account": "BCCodeSigningTest",
+    "CertificateProfile": "BCCodeSigningPublic"
+  },
   "templateSha": "9760f52bd4321cb6698641b3e23c09fdb772d61d"
 }
