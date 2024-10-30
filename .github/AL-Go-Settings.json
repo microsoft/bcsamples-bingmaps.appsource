@@ -1,6 +1,6 @@
 {
   "type": "AppSource App",
-  "templateUrl": "https://github.com/freddydk/AL-Go@trustedSigning",
+  "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
   "NextMajorSchedule": "0 2 * * 0",
   "NextMinorSchedule": "0 2 * * 6",
   "CurrentSchedule": "0 2 * * 1,2,3,4,5",
@@ -26,5 +26,5 @@
     "Account": "BCCodeSigningTest",
     "CertificateProfile": "BCCodeSigningPublic"
   },
-  "templateSha": "7b6324934f6d3248274ad55297bb3ded60bdcea2"
+  "templateSha": "1cd8a0d944c5c5e40d954f2d807a55deb375afc4"
 }
