@@ -27,5 +27,6 @@
     "Account": "BCCodeSigningTest",
     "CertificateProfile": "BCCodeSigningPublic"
   },
+  "trackALAlertsInGitHub": true,
   "templateSha": "1ad2c5ac3f976c3f4e69177a738fafffa4cf42d7"
 }
