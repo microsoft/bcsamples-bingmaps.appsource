@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go/32e66d69cfd2c1e3eca39e416e27c6aa58de6df3/Actions/.Modules/settings.schema.json",
   "type": "AppSource App",
   "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
   "NextMajorSchedule": "0 2 * * 0",
@@ -26,5 +27,6 @@
     "Account": "BCCodeSigningTest",
     "CertificateProfile": "BCCodeSigningPublic"
   },
-  "templateSha": "1a78239c6dd89870bae4629d7d80406eaf51fc67"
+  "trackALAlertsInGitHub": true,
+  "templateSha": "1ad2c5ac3f976c3f4e69177a738fafffa4cf42d7"
 }
