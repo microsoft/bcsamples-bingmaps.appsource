@@ -12,7 +12,7 @@
     "continuousDelivery": true,
     "mainAppFolder": "BingMaps-AppSource",
     "includeDependencies": [
-      "Freddy Kristiansen_*.app"
+      "Microsoft Samples_*.app"
     ]
   },
   "generateDependencyArtifact": true,

@@ -1,10 +1,10 @@
 {
   "id": "4270bff7-c860-434f-b09a-0f3e37d243fd",
   "name": "BingMaps.AppSource",
-  "publisher": "Freddy Kristiansen",
+  "publisher": "Microsoft samples",
   "brief": "BingMaps Integration",
   "description": "BingMaps Integration App with geocode functionality and map control",
-  "version": "4.8.0.0",
+  "version": "5.0.0.0",
   "privacyStatement": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
   "EULA": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
   "help": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
@@ -15,19 +15,19 @@
     {
       "id": "3fb011e8-1265-4b75-b527-fa8e8e512aec",
       "name": "BingMaps.Common",
-      "publisher": "Freddy Kristiansen",
-      "version": "4.8.0.0"
+      "publisher": "Microsoft",
+      "version": "5.0.0.0"
     },
     {
       "id": "93ef78d0-3805-484b-ab3d-a72ef2b1ea9c",
-      "name": "FreddyDK.Licensing",
-      "publisher": "Freddy Kristiansen",
-      "version": "4.8.0.0"
+      "name": "Microsoft Samples.Licensing",
+      "publisher": "Microsoft Samples",
+      "version": "5.0.0.0"
     }
   ],
   "screenshots": [],
-  "platform": "20.0.0.0",
-  "application": "20.0.0.0",
+  "platform": "25.0.0.0",
+  "application": "25.0.0.0",
   "idRanges": [
     {
       "from": 70074119,
@@ -46,7 +46,7 @@
   "supportedLocales": [
     "en-US"
   ],
-  "runtime": "8.0",
+  "runtime": "14.0",
   "keyVaultUrls": [],
   "applicationInsightsConnectionString": "InstrumentationKey=84bd9223-67d4-4378-8590-9e4a46023be2;IngestionEndpoint=https://westeurope-1.in.applicationinsights.azure.com/"
 }

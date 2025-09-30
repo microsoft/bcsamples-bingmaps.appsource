@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v7.2/settings.schema.json",
+  "workflowSchedule": {
+    "cron": "0 0 * * *"
+  }
+}

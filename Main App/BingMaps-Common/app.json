@@ -1,8 +1,8 @@
 {
   "id": "3fb011e8-1265-4b75-b527-fa8e8e512aec",
   "name": "BingMaps.Common",
-  "publisher": "Freddy Kristiansen",
-  "version": "4.8.0.0",
+  "publisher": "Microsoft samples",
+  "version": "5.0.0.0",
   "brief": "BingMaps Common",
   "description": "BingMaps Common App",
   "privacyStatement": "https://dev.azure.com/businesscentralapps/BingMaps.AppSource",
@@ -13,8 +13,8 @@
   "logo": "bingmaps256x240.png",
   "dependencies": [],
   "screenshots": [],
-  "platform": "20.0.0.0",
-  "application": "20.0.0.0",
+  "platform": "25.0.0.0",
+  "application": "25.0.0.0",
   "idRanges": [
     {
       "from": 70074128,
@@ -31,5 +31,5 @@
     "includeSourceInSymbolFile": true
   },
   "target": "Cloud",
-  "runtime": "8.0"
+  "runtime": "14.0"
 }
