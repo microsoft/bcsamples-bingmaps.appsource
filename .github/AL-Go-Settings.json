@@ -2,9 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go/32e66d69cfd2c1e3eca39e416e27c6aa58de6df3/Actions/.Modules/settings.schema.json",
   "type": "AppSource App",
   "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
-  "NextMajorSchedule": "0 2 * * 0",
-  "NextMinorSchedule": "0 2 * * 6",
-  "CurrentSchedule": "0 2 * * 1,2,3,4,5",
   "runs-on": "ubuntu-latest",
   "unusedALGoSystemFiles": [
     "AddExistingAppOrTestApp.yaml",
