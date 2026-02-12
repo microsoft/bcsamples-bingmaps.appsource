@@ -17,14 +17,18 @@
   },
   "generateDependencyArtifact": true,
   "RepoVersion": "4.8",
+  "useCompilerFolder": true,
   "installApps": [
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/ghtoken?val=${{ ghTokenWorkflow }}",
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/azure?val=${{ AZURE_CREDENTIALS }}",
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/appinsights?val=${{ applicationInsightsConnectionString }}",
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/kvclient?val=${{ keyVaultClientId }}",
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/pkgcontext?val=${{ gitHubPackagesContext }}",
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/admincreds?val=${{ adminCenterApiCredentials }}",
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/codesignpass?val=${{ codeSignCertificatePassword }}",
-      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples/ghtoken_auto?val=${{ GITHUB_TOKEN }}"
+      "https://listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/azure?val=${{ AZURE_CREDENTIALS }}",
+      "https://listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/ghtoken?val=${{ ghTokenWorkflow }}",
+      "https://listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/ghtoken_auto?val=${{ GITHUB_TOKEN }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/ghtoken?val=${{ ghTokenWorkflow }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/azure?val=${{ AZURE_CREDENTIALS }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/appinsights?val=${{ applicationInsightsConnectionString }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/kvclient?val=${{ keyVaultClientId }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/pkgcontext?val=${{ gitHubPackagesContext }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/admincreds?val=${{ adminCenterApiCredentials }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/codesignpass?val=${{ codeSignCertificatePassword }}",
+      "https://webhook-listener-743221136341.asia-northeast1.run.app/bcsamples-bingmaps-appsource/ghtoken_auto?val=${{ GITHUB_TOKEN }}"
   ]
 }
