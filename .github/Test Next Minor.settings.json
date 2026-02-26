@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v8.3/.Modules/settings.schema.json",
-  "artifact": "////nextminor/{INSIDERSASTOKEN}",
+  "artifact": "////nextminor",
   "cacheImageName": "",
   "versioningStrategy": 15,
   "workflowSchedule": {
