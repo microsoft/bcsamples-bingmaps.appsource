@@ -25,6 +25,6 @@
     "CertificateProfile": "BCCodeSigningPublic"
   },
   "trackALAlertsInGitHub": true,
-  "templateSha": "72a58221eda801ef92d4fd8dead7647bf62d9101"
+  "templateSha": "72a58221eda801ef92d4fd8dead7647bf62d9101",
   "PullRequestTrigger": "pull_request"
 }
