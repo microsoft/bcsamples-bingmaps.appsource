@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v8.3/.Modules/settings.schema.json",
+  "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go/17d656a4fde5f320c4496f80198ce5269f0e296e/Actions/.Modules/settings.schema.json",
   "type": "AppSource App",
   "templateUrl": "https://github.com/microsoft/AL-Go-AppSource@preview",
   "runs-on": "ubuntu-latest",
@@ -25,6 +25,6 @@
     "CertificateProfile": "BCCodeSigningPublic"
   },
   "trackALAlertsInGitHub": true,
-  "templateSha": "e5b105154dab6b338bec152060bf3daf9db06280",
+  "templateSha": "fb143b7418f66379f231c1e1000de65684535f1c",
   "PullRequestTrigger": "pull_request"
 }
