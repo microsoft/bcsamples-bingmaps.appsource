@@ -26,5 +26,8 @@
   },
   "trackALAlertsInGitHub": true,
   "templateSha": "a384531e27534af743f1c0e36d4be26dd29bf6f3",
-  "PullRequestTrigger": "pull_request"
+  "PullRequestTrigger": "pull_request",
+  "CodeReviewAgent": {
+    "enabled": true
+  }
 }
