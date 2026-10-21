@@ -39,7 +39,7 @@ page 70074125 "BingMaps Settings"
     var
         BingMapsSettings: Record "BingMaps Settings";
         BingMapsSetup: Codeunit "BingMaps Setup";
-        sessionId: Integer;
+        sessionId: Integerz;
         ErrorText: Text;
     begin
         case Rec.Name of
@@ -53,7 +53,7 @@ page 70074125 "BingMaps Settings"
                     if not BingMapsSetup.TestSettings(BingMapsSettings, ErrorText) then
                         ERROR(ErrorText);
                     BingMapsSettings."BingMaps Key OK" := true;
-                    BingMapsSettings.Modify();
+                    BingMapsSettings.Modify()
                     Commit();
                     StartSession(sessionId, Codeunit::"BingMaps Geocode");
                 end;
